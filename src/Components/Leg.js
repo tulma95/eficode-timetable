@@ -1,11 +1,21 @@
 import React from 'react';
 import { Card, Icon } from 'semantic-ui-react'
+import { formatDate } from '../utils/helperFunctions'
 
 const Leg = (leg) => {
-  const startTime = new Date(leg.startTime)
-  const endTime = new Date(leg.endTime)
+  const startTime = formatDate(new Date(leg.startTime))
 
   const icon = chooseIconByMode(leg.mode)
+
+  const routeInfo = ({ from, to }) => {
+    return (
+      <Card.Content>
+        {from.name} <br />
+        to <br />
+        {to.name}
+      </Card.Content >
+    )
+  }
 
   return (
     <Card key={startTime}>
@@ -16,12 +26,16 @@ const Leg = (leg) => {
             size='large'
           />
         </Card.Content>
-        TIME: {startTime.toLocaleTimeString()}
-        <br />
-        {leg.mode} {leg.route ? leg.route.shortName : ''}
-        <br />
+        departure: {startTime}
+        < Card.Content >
+          {leg.mode} {leg.trip && leg.trip.routeShortName}
+        </Card.Content>
+        {leg.mode === 'WALK' ?
+          <Card.Content content={`${leg.distance.toFixed(0)}m`} />
+          : <Card.Content content={routeInfo(leg)} />
+        }
       </Card.Content>
-    </Card>
+    </Card >
   )
 }
 

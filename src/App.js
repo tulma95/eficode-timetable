@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import ApolloClient, { gql } from 'apollo-boost'
-import { Grid, Container } from 'semantic-ui-react'
+import React, { useState } from 'react';
+import { gql } from 'apollo-boost'
+import { useQuery } from '@apollo/react-hooks'
+import { Grid, Container, Header } from 'semantic-ui-react'
 import Itinerary from './Components/Itinerary'
+import { formatDate } from './utils/helperFunctions'
 
-const client = new ApolloClient({
-  uri: 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
-})
 
-const query = gql`
+const getItineraries = gql`
 query {
   plan(
-    fromPlace: "Pohjoinen Rautatienkatu 25, Helsinki::60.169392,24.925751"
-    toPlace: "Kumpula, Helsinki::60.204020,24.962670"
-    numItineraries: 3
-  ) {
+  fromPlace: "Pohjoinen Rautatienkatu 25, Helsinki::60.169392,24.925751", 
+  toPlace: "Exactum, Gustaf Hällströmin Katu 2 B, Helsinki::60.204868,24.963030", 
+  numItineraries: 3) {
+    from {
+      name
+    }
+    to {
+      name
+    }
     itineraries {
       startTime
       endTime
@@ -23,14 +27,15 @@ query {
         endTime
         mode
         duration
-        distance        
-        route {
-          shortName
+        distance
+        from {
+          name
+        }
+        to {
+          name
         }
         trip {
-          stops {
-           	name
-          }
+          routeShortName
         }
       }
     }
@@ -38,45 +43,33 @@ query {
 }
 `
 
-
-//1163 pysäkki id
-// pohjoinen rautatienkatu25
-// lat 60.169392 lon: 24.925751
-
-// Exactum
-// lat: 60.204020 lon: 24.962670
-
-// from: "Kamppi, Helsinki::60.168992,24.932366",
-// toPlace: "Kumpula, Helsinki::60.204020,24.962670",
-
 const App = () => {
-  const [itineraries, setItineraries] = useState([])
-  const [time, setTime] = useState(new Date().toLocaleTimeString())
+  const { loading, error, data } = useQuery(getItineraries, {
+    pollInterval: 30000
+  })
 
-  useEffect(() => {
-    client.query({ query })
-      .then((response) => {
-        setItineraries(response.data.plan.itineraries)
-      })
-  }, [time])
+  const [time, setTime] = useState(formatDate(new Date()))
 
   setInterval(() => {
-    setTime(new Date().toLocaleTimeString())
+    setTime(formatDate(new Date()))
   }, 30000);
 
-
-
-
+  if (loading) return <div className="ui active centered inline loader"></div>
+  if (error) return <div>{error}</div>
 
   return (
-    <Container>
-      KELLO ON {time}
-
-      <Grid>
-        <Grid.Column>
-          {itineraries.
-            map(Itinerary)}
-        </Grid.Column>
+    <Container textAlign='center'>
+      <Header dividing content={`Current time ${time}`} />
+      <Grid columns={3}>
+        <Grid.Row>
+          {data.plan.itineraries.map(itinerary => (
+            <Itinerary
+              key={itinerary.startTime}
+              startLocation={data.plan.from.name}
+              destination={data.plan.to.name}
+              itinerary={itinerary}
+            />))}
+        </Grid.Row>
       </Grid>
     </Container>
   )
