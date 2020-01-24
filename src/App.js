@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
 import ApolloClient, { gql } from 'apollo-boost'
+import { Grid, Container } from 'semantic-ui-react'
+import Itinerary from './Components/Itinerary'
+
 const client = new ApolloClient({
   uri: 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql'
 })
@@ -62,39 +64,21 @@ const App = () => {
     setTime(new Date().toLocaleTimeString())
   }, 30000);
 
-  const Itinerary = (itinerary) => {
-    const totalDuration = new Date(null)
-    totalDuration.setSeconds(itinerary.duration)
-    return (
-      <div key={itinerary.startTime}>
-        ------------------------
-       <p>total duration: {totalDuration.toISOString().substr(11, 8)}</p>
-        {itinerary.legs.map(Leg)}
-      </div>
-    )
-  }
 
-  const Leg = (leg) => {
-    const startTime = new Date(leg.startTime)
-    const endTime = new Date(leg.endTime)
-    return (
-      <div key={startTime}>
-        TIME: {startTime.toLocaleTimeString()}
-        <br />
-        {leg.mode} {leg.route ? leg.route.shortName : ''}
-        <br />
-        ENDTIME: {endTime.toLocaleTimeString()}
-      </div>
-    )
-  }
+
+
 
   return (
-    <div>
+    <Container>
       KELLO ON {time}
-      {
-        itineraries.map(Itinerary)
-      }
-    </div>
+
+      <Grid>
+        <Grid.Column>
+          {itineraries.
+            map(Itinerary)}
+        </Grid.Column>
+      </Grid>
+    </Container>
   )
 }
 
