@@ -59,8 +59,8 @@ const App = () => {
 
   return (
     <Container textAlign='center'>
-      <Header dividing content={`Current time ${time}`} />
-      <Grid columns={3}>
+      <Header as='h1' dividing content={`Current time ${time}`} />
+      <Grid stackable columns={3}>
         <Grid.Row>
           {data.plan.itineraries.map(itinerary => (
             <Itinerary
