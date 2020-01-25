@@ -13,8 +13,8 @@ const Itinerary = ({ itinerary, startLocation, destination }) => {
 
 
   return (
-    <Grid.Row>
-      <Card className='itinerary' fluid key={itinerary.startTime}>
+    <Grid.Row key={itinerary.startTime}>
+      <Card className='itinerary' fluid >
         <Card.Content>
           <Card.Header as='h2'>
             {startTime}

@@ -23,8 +23,8 @@ const Leg = (leg) => {
 
   return (
 
-    <Grid.Column stretched>
-      <Card key={startTime}>
+    <Grid.Column key={startTime} stretched>
+      <Card >
         <Card.Content>
           <Card.Content>
             <Icon
