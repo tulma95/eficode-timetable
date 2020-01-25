@@ -2,6 +2,8 @@
 
 Web application that shows next three itineraries from Pohjoinen Rautatienkatu to Kumpulan kampus. Data is fetched from digitransit GraphQL api.
 
+[Heroku link](https://eficode-timetables.herokuapp.com/)
+
 ## Building with docker
 1. Clone repository and move to it
 ```
