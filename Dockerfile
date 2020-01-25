@@ -8,4 +8,6 @@ RUN npm install --silent
 
 COPY . .
 
-CMD ["npm",  "run", "start-heroku"]
+EXPOSE 3000
+
+CMD ["npm",  "start"]
