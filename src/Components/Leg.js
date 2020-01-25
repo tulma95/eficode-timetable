@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon } from 'semantic-ui-react'
+import { Card, Icon, Divider } from 'semantic-ui-react'
 import { formatDate } from '../utils/helperFunctions'
 
 const Leg = (leg) => {
@@ -11,7 +11,7 @@ const Leg = (leg) => {
     return (
       <Card.Content>
         {from.name} <br />
-        to <br />
+        <Icon name='arrow down' /> <br />
         {to.name}
       </Card.Content >
     )
@@ -27,6 +27,7 @@ const Leg = (leg) => {
           />
         </Card.Content>
         departure: {startTime}
+        <Divider />
         < Card.Content >
           {leg.mode} {leg.trip && leg.trip.routeShortName}
         </Card.Content>
