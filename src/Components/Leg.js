@@ -22,7 +22,6 @@ const Leg = (leg) => {
   }
 
   return (
-
     <Grid.Column textAlign='center' key={startTime}>
       <Card centered>
         <Card.Content>
@@ -37,7 +36,7 @@ const Leg = (leg) => {
           departure: {startTime}
           <Divider />
 
-          < Card.Content >
+          <Card.Content>
             {leg.mode} {leg.trip && leg.trip.routeShortName}
           </Card.Content>
 
@@ -47,7 +46,7 @@ const Leg = (leg) => {
           }
 
         </Card.Content>
-      </Card >
+      </Card>
     </Grid.Column>
 
   )

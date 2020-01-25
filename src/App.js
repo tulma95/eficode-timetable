@@ -5,7 +5,6 @@ import { Grid, Container, Header } from 'semantic-ui-react'
 import Itinerary from './Components/Itinerary'
 import { formatDate } from './utils/helperFunctions'
 
-
 const getItineraries = gql`
 query {
   plan(
@@ -71,7 +70,6 @@ const App = () => {
           />))}
       </Grid>
     </Container>
-
   )
 }
 
