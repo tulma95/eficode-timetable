@@ -30,8 +30,10 @@ const Itinerary = ({ itinerary, startLocation, destination }) => {
             to <br />
             {destination}
           </Card.Description>
-          <Grid columns={itinerary.legs.length}>
-            {itinerary.legs.map(Leg)}
+          <Grid stackable centered columns={itinerary.legs.length}>
+            <Grid.Row stretched>
+              {itinerary.legs.map(Leg)}
+            </Grid.Row>
           </Grid>
         </Card.Content>
       </Card>

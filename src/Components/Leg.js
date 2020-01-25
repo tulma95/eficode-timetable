@@ -23,9 +23,10 @@ const Leg = (leg) => {
 
   return (
 
-    <Grid.Column key={startTime} stretched>
-      <Card >
+    <Grid.Column textAlign='center' key={startTime}>
+      <Card centered>
         <Card.Content>
+
           <Card.Content>
             <Icon
               name={icon}
@@ -57,6 +58,8 @@ const chooseIconByMode = (mode) => {
     return 'bus'
   } else if (mode === 'TRAM') {
     return 'train'
+  } else if (mode === 'SUBWAY') {
+    return 'subway'
   } else {
     return 'blind'
   }
