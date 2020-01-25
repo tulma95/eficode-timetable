@@ -3,5 +3,6 @@ build:
     web: Dockerfile
   config:
     NODE_ENV: production
+    PORT: $PORT
 run:
-  web: npm start-heroku
+  web: npm start

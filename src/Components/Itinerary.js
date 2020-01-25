@@ -13,16 +13,14 @@ const Itinerary = ({ itinerary, startLocation, destination }) => {
 
 
   return (
-    <Grid.Column>
-      <Card key={itinerary.startTime}>
+    <Grid.Row>
+      <Card className='itinerary' fluid key={itinerary.startTime}>
         <Card.Content>
-
           <Card.Header as='h2'>
             {startTime}
             <Icon name='arrow right' />
             {endTime}
           </Card.Header >
-
           <Card.Header>
             total duration: {totalDuration.toISOString().substr(11, 5)}
           </Card.Header>
@@ -32,12 +30,12 @@ const Itinerary = ({ itinerary, startLocation, destination }) => {
             to <br />
             {destination}
           </Card.Description>
-
-          {itinerary.legs.map(Leg)}
-
+          <Grid columns={itinerary.legs.length}>
+            {itinerary.legs.map(Leg)}
+          </Grid>
         </Card.Content>
       </Card>
-    </Grid.Column >
+    </Grid.Row>
   )
 }
 

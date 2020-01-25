@@ -60,18 +60,18 @@ const App = () => {
   return (
     <Container textAlign='center'>
       <Header as='h1' dividing content={`Current time ${time}`} />
-      <Grid stackable columns={3}>
-        <Grid.Row>
-          {data.plan.itineraries.map(itinerary => (
-            <Itinerary
-              key={itinerary.startTime}
-              startLocation={data.plan.from.name}
-              destination={data.plan.to.name}
-              itinerary={itinerary}
-            />))}
-        </Grid.Row>
+
+      <Grid centered divided='vertically'>
+        {data.plan.itineraries.map(itinerary => (
+          <Itinerary
+            key={itinerary.startTime}
+            startLocation={data.plan.from.name}
+            destination={data.plan.to.name}
+            itinerary={itinerary}
+          />))}
       </Grid>
     </Container>
+
   )
 }
 
