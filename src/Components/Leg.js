@@ -17,6 +17,10 @@ const Leg = (leg) => {
     )
   }
 
+  const walkInfo = leg => {
+    return `${leg.distance.toFixed(0)}m to ${leg.to.name}`
+  }
+
   return (
 
     <Grid.Column stretched>
@@ -28,15 +32,19 @@ const Leg = (leg) => {
               size='large'
             />
           </Card.Content>
+
           departure: {startTime}
           <Divider />
+
           < Card.Content >
             {leg.mode} {leg.trip && leg.trip.routeShortName}
           </Card.Content>
+
           {leg.mode === 'WALK' ?
-            <Card.Content content={`${leg.distance.toFixed(0)}m`} />
+            <Card.Content content={walkInfo(leg)} />
             : <Card.Content content={routeInfo(leg)} />
           }
+
         </Card.Content>
       </Card >
     </Grid.Column>
