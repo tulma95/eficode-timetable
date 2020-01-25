@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { gql } from 'apollo-boost'
 import { useQuery } from '@apollo/react-hooks'
 import { Grid, Container, Header } from 'semantic-ui-react'
@@ -51,7 +51,7 @@ const App = () => {
 
   setInterval(() => {
     setTime(formatDate(new Date()))
-  }, 30000);
+  }, 30000)
 
   if (loading) return <div className="ui active centered inline loader"></div>
   if (error) return <div>{error}</div>
@@ -73,4 +73,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default App

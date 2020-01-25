@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { Card, Icon, Divider, Grid } from 'semantic-ui-react'
 import { formatDate } from '../utils/helperFunctions'
 
@@ -25,17 +25,14 @@ const Leg = (leg) => {
     <Grid.Column textAlign='center' key={startTime}>
       <Card centered>
         <Card.Content>
-
           <Card.Content>
             <Icon
               name={icon}
               size='large'
             />
           </Card.Content>
-
           departure: {startTime}
           <Divider />
-
           <Card.Content>
             {leg.mode} {leg.trip && leg.trip.routeShortName}
           </Card.Content>
@@ -55,13 +52,14 @@ const Leg = (leg) => {
 const chooseIconByMode = (mode) => {
   if (mode === 'BUS') {
     return 'bus'
-  } else if (mode === 'TRAM') {
-    return 'train'
-  } else if (mode === 'SUBWAY') {
-    return 'subway'
-  } else {
-    return 'blind'
   }
+  if (mode === 'TRAM') {
+    return 'train'
+  }
+  if (mode === 'SUBWAY') {
+    return 'subway'
+  }
+  return 'blind'
 }
 
-export default Leg;
+export default Leg

@@ -11,10 +11,9 @@ const Itinerary = ({ itinerary, startLocation, destination }) => {
   const startTime = formatDate(new Date(itinerary.startTime))
   const endTime = formatDate(new Date(itinerary.endTime))
 
-
   return (
     <Grid.Row key={itinerary.startTime}>
-      <Card className='itinerary' fluid >
+      <Card className='itinerary' fluid>
         <Card.Content>
           <Card.Header as='h2'>
             {startTime}
@@ -40,6 +39,5 @@ const Itinerary = ({ itinerary, startLocation, destination }) => {
     </Grid.Row>
   )
 }
-
 
 export default Itinerary
